@@ -17,6 +17,7 @@
             <div>
                 <h3 class="winner-statement"></h3>
             </div>
+            <div class="reset-button"></div>
           </div>
         <div class="btn-container">
             <button id="rock" class="btn">rock</button>
@@ -24,18 +25,26 @@
             <button id="scissors"class="btn">scissors</button>
         </div>
         <script>
+            const resetDiv = document.querySelector('.reset-button');
+            const resetButton = document.createElement('button');
+            const roundResult = document.querySelector('.result-text');
+            const livePScore = document.querySelector('.player-score');
+            const liveCScore = document.querySelector('.computer-score');
+            const winnerStatement = document.querySelector('.winner-statement');
+            resetButton.innerText = "Reset";
+
             function game(){
-                const roundResult = document.querySelector('.result-text');
-                const livePScore = document.querySelector('.player-score');
-                const liveCScore = document.querySelector('.computer-score');
-                const winnerStatement = document.querySelector('.winner-statement');
                 let playerScore = 0;
                 let computerScore = 0;
-
+                function reset() {
+                    location.reload();
+                }
+                resetButton.addEventListener("click", reset); 
                 function playRound(e){
                     winnerStatement.textContent = "";
                     const playerSelection = e.target.id;
                     const computerSelection = getComputerChoice();
+
                     switch(playerSelection) {
                         case "rock":
                             if (computerSelection == "rock") {
@@ -71,8 +80,9 @@
                             }
                     }
                     liveCScore.textContent = "Computer: " + computerScore;
-                    livePScore.textContent = "You: " +playerScore;
+                    livePScore.textContent = "You: " + playerScore;
                     if (playerScore === 5 || computerScore === 5) {
+                        resetDiv.appendChild(resetButton);
                         determineWinner();
                     }
                 }
@@ -80,7 +90,6 @@
                     let arr = ["rock", "paper" , "scissors"]
                     return arr[(Math.floor(Math.random() * arr.length))]
                 }
-
                 function determineWinner() {
                     if (playerScore > computerScore){
                         winnerStatement.textContent = `You win by a score of ${playerScore} to ${computerScore}`;
@@ -89,10 +98,7 @@
                     } else {
                         winnerStatement.textContent = "The game ends in a tie!";
                     }
-                    playerScore = 0;
-                    computerScore = 0;
                 }
-
                 const buttons = document.querySelectorAll('.btn');
                 buttons.forEach(btn => btn.addEventListener('click', playRound));
             }
