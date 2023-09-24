@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: silver;
+  }
+
+.result-container {
+    text-align: center;
+    font-size: 24px;
+    z-index: 2;
+}
+
+.result-text{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-score,
+.computer-score {
+  font-weight: bold;
+}
+
+.separator {
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.btn{
+    width: 150px;
+    height: 150px;
+    font-size: 16px;
+    
+}
+
+.btn-container{
+    padding: 150px;
+    position: relative; 
+    z-index: 1;
+}
